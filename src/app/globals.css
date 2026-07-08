@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #08080c;
+  --color-background: #07070b;
   --color-foreground: #eeeef0;
   --color-primary: #a78bfa;
   --color-primary-dark: #7c3aed;
@@ -43,33 +43,23 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-@keyframes grid-pan {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-50px, -50px); }
-}
-
 .grid-bg {
-  background-image: 
+  background-image:
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
 }
 
-.glow-dot {
-  box-shadow: 0 0 60px rgba(167, 139, 250, 0.15), 0 0 120px rgba(45, 212, 191, 0.05);
+.reveal-text {
+  animation: reveal 1.2s cubic-bezier(0.77, 0, 0.18, 1) forwards;
 }
 
-::-webkit-scrollbar {
-  width: 4px;
-}
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: #2a2a35;
-  border-radius: 2px;
-}
+::-webkit-scrollbar-thumb { background: #2a2a35; border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: #3a3a45; }

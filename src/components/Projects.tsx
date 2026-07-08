@@ -8,35 +8,41 @@ const projects = [
     title: "Vulnerability Scanner",
     desc: "Automated OWASP Top 10 detection, port scanning, and reporting tool for web app security audits.",
     tags: ["Python", "Nmap", "Burp Suite", "Kali Linux"],
+    color: "from-rose-500/20 to-amber-500/20",
   },
   {
     title: "E-Commerce Platform",
     desc: "Full-featured e-commerce with product management, cart, checkout, and Stripe payment integration.",
     tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
+    color: "from-blue-500/20 to-cyan-500/20",
   },
   {
     title: "Task Manager",
     desc: "Real-time collaborative task management with drag-and-drop, workspaces, and notifications.",
     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
+    color: "from-violet-500/20 to-purple-500/20",
   },
   {
     title: "Analytics Dashboard",
     desc: "Real-time data visualization dashboard with custom reports and interactive D3.js charts.",
     tags: ["React", "D3.js", "Express", "Redis"],
+    color: "from-emerald-500/20 to-teal-500/20",
   },
   {
     title: "Social Platform",
     desc: "Modern social platform with posts, stories, messaging, and recommendation algorithms.",
     tags: ["Next.js", "GraphQL", "AWS", "Docker"],
+    color: "from-orange-500/20 to-pink-500/20",
   },
   {
     title: "Portfolio Builder",
     desc: "Drag-and-drop builder for dev portfolios with customizable templates and custom domains.",
     tags: ["React", "Node.js", "PostgreSQL", "Vercel"],
+    color: "from-primary/20 to-accent/20",
   },
 ];
 
-function TiltCard({ children }: { children: React.ReactNode }) {
+function TiltCard({ children, color }: { children: React.ReactNode; color: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   const onMouseMove = (e: React.MouseEvent) => {
@@ -59,7 +65,18 @@ function TiltCard({ children }: { children: React.ReactNode }) {
       onMouseLeave={onMouseLeave}
       style={{ transition: "transform 0.15s ease-out" }}
     >
-      {children}
+      <div className={`glass rounded-xl p-6 h-full cursor-default group hover:border-primary/30 transition-all relative overflow-hidden`}>
+        <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        <div className="relative z-10">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-primary/60" />
+            <span className="text-xs font-mono text-muted">project-{String(projects.indexOf(projects.find(p => p.tags[0] === children ? true : false) || projects[0]) + 1).padStart(2, "0")}</span>
+          </div>
+          <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{/* title */}</h3>
+          <p className="text-sm text-muted leading-relaxed mb-5">{/* desc */}</p>
+          <div className="flex flex-wrap gap-2">{/* tags */}</div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -77,7 +94,7 @@ export default function Projects() {
         >
           <span className="text-xs font-mono text-muted tracking-widest uppercase mb-3 block">/projects</span>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5">
-            Featured Work
+            Featured <span className="gradient-text">Work</span>
           </h2>
           <p className="text-muted">
             Projects I&apos;ve built — from security tools to full-stack applications.
@@ -93,8 +110,9 @@ export default function Projects() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: 0.06 * i, duration: 0.4 }}
             >
-              <TiltCard>
-                <div className="glass rounded-xl p-6 h-full cursor-default group hover:border-primary/30 transition-all">
+              <div className="glass rounded-xl p-6 h-full cursor-default group hover:border-primary/30 transition-all relative overflow-hidden">
+                <div className={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-2 h-2 rounded-full bg-primary/60" />
                     <span className="text-xs font-mono text-muted">project-{String(i + 1).padStart(2, "0")}</span>
@@ -113,7 +131,7 @@ export default function Projects() {
                     ))}
                   </div>
                 </div>
-              </TiltCard>
+              </div>
             </motion.div>
           ))}
         </div>

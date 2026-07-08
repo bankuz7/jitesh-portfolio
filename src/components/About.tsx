@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import AnimatedCounter from "./AnimatedCounter";
 
 const items = [
-  { label: "Status", value: "B.Com S.Y. Sem 3" },
-  { label: "Cert", value: "Tally ERP L3" },
-  { label: "Projects", value: "20+" },
-  { label: "Focus", value: "Dev + Security" },
+  { label: "Status", value: "B.Com S.Y. Sem 3", isNum: false },
+  { label: "Cert", value: "Tally ERP L3", isNum: false },
+  { label: "Projects", value: 20, suffix: "+", isNum: true },
+  { label: "Focus", value: "Dev + Security", isNum: false },
 ];
 
 export default function About() {
@@ -42,7 +43,7 @@ export default function About() {
         >
           <div className="glass rounded-xl p-4 px-5 opacity-40">
             <div className="text-lg font-bold gradient-text">3+</div>
-            <div className="text-[10px] text-muted">Years of dev</div>
+            <div className="text-[10px] text-muted">Years</div>
           </div>
         </motion.div>
       </div>
@@ -57,7 +58,7 @@ export default function About() {
         >
           <span className="text-xs font-mono text-muted tracking-widest uppercase mb-3 block">/about</span>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5">
-            Building &amp; Breaking
+            Building &amp; <span className="gradient-text">Breaking</span>
           </h2>
           <p className="text-base sm:text-lg text-muted leading-relaxed">
             I&apos;m a full-stack developer and ethical pentester. I build secure apps with
@@ -76,7 +77,9 @@ export default function About() {
               transition={{ delay: 0.08 * i, duration: 0.5 }}
               className="glass rounded-xl p-5 text-center group hover:border-primary/30 transition-all"
             >
-              <div className="text-2xl font-bold gradient-text mb-1">{item.value}</div>
+              <div className="text-2xl font-bold gradient-text mb-1">
+                {item.isNum ? <AnimatedCounter value={item.value as number} suffix={item.suffix as string} /> : item.value}
+              </div>
               <div className="text-xs text-muted tracking-wide">{item.label}</div>
             </motion.div>
           ))}

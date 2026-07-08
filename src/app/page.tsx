@@ -1,4 +1,6 @@
 import CursorGlow from "@/components/CursorGlow";
+import ScrollProgress from "@/components/ScrollProgress";
+import BackToTop from "@/components/BackToTop";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,6 +12,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <CursorGlow />
       <Navbar />
       <Hero />
@@ -18,6 +21,7 @@ export default function Home() {
       <Projects />
       <Contact />
       <Footer />
+      <BackToTop />
     </>
   );
 }

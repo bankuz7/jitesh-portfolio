@@ -13,14 +13,19 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center pt-24 pb-16 px-6 lg:px-8 overflow-hidden"
     >
-      <div className="absolute inset-0 -z-20">
+      <motion.div
+        className="absolute inset-0 -z-20"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 6, ease: "easeOut" }}
+      >
         <div
           className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: "url(/images/hero-bg.jpg)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
-        <div className="absolute inset-0 bg-background/30" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
+        <div className="absolute inset-0 bg-background/20" />
+      </motion.div>
 
       <div className="absolute inset-0 -z-10 grid-bg" />
       <div className="absolute top-1/3 left-[20%] w-[400px] h-[400px] bg-primary/15 rounded-full blur-[120px]" />
@@ -48,7 +53,16 @@ export default function Hero() {
               transition={{ duration: 0.6 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-5"
             >
-              Jitesh
+              <span className="inline-block overflow-hidden">
+                <motion.span
+                  className="inline-block"
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Jitesh
+                </motion.span>
+              </span>
               <br />
               <span className="gradient-text">Dev &amp; Pentester</span>
             </motion.h1>
@@ -62,7 +76,7 @@ export default function Hero() {
               and bug hunter who codes.
             </motion.p>
 
-            <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="flex items-center gap-4">
+            <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="flex items-center gap-4 flex-wrap">
               <a
                 href="#projects"
                 onClick={(e) => { e.preventDefault(); document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" }); }}
@@ -77,6 +91,16 @@ export default function Hero() {
                 className="px-6 py-3 rounded-full text-sm font-medium glass text-foreground hover:bg-white/5 transition-colors"
               >
                 Get in touch
+              </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                className="px-6 py-3 rounded-full text-sm font-medium glass text-muted hover:text-foreground hover:border-primary/40 transition-all flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                Resume
               </a>
             </motion.div>
 
@@ -104,9 +128,9 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="hidden lg:block"
           >
             <div className="glass glow-dot rounded-2xl p-6 relative">
@@ -117,10 +141,15 @@ export default function Hero() {
                 <span className="text-xs text-muted ml-2">terminal — ~/jitesh</span>
               </div>
               <div className="space-y-2 text-sm font-mono">
-                <p><span className="text-emerald-400">jitesh@dev</span><span className="text-muted">:</span><span className="text-primary">~</span><span className="text-muted">$</span> cat about.txt</p>
-                <p className="text-muted pl-4">Full-stack developer + pentester</p>
-                <p className="text-muted pl-4">B.Com (S.Y.) | Tally ERP L3 certified</p>
-                <p className="text-muted pl-4">Building secure things since 2021</p>
+                <p><span className="text-emerald-400">jitesh@dev</span><span className="text-muted">:</span><span className="text-primary">~</span><span className="text-muted">$</span> neofetch</p>
+                <p className="text-muted">Name: Jitesh</p>
+                <p className="text-muted">Role: Dev + Pentester</p>
+                <p className="text-muted">Education: B.Com (S.Y.)</p>
+                <p className="text-muted">Cert: Tally ERP L3</p>
+                <p className="text-muted">Status: <span className="text-emerald-400">Available</span></p>
+                <p><br /></p>
+                <p><span className="text-emerald-400">jitesh@dev</span><span className="text-muted">:</span><span className="text-primary">~</span><span className="text-muted">$</span> uptime --pretty</p>
+                <p className="text-muted">Building since 2021</p>
                 <p><br /></p>
                 <p><span className="text-emerald-400">jitesh@dev</span><span className="text-muted">:</span><span className="text-primary">~</span><span className="text-muted">$</span> <span className="animate-pulse">_</span></p>
               </div>

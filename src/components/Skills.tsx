@@ -43,19 +43,21 @@ const categories = [
 
 function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
   return (
-    <div className="mb-4 last:mb-0">
+    <div className="mb-4 last:mb-0 group">
       <div className="flex justify-between text-sm mb-1.5">
-        <span className="text-foreground/80">{name}</span>
+        <span className="text-foreground/80 group-hover:text-foreground transition-colors">{name}</span>
         <span className="text-muted font-mono text-xs">{level}%</span>
       </div>
-      <div className="h-1.5 bg-border rounded-full overflow-hidden">
+      <div className="h-[3px] bg-border rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
+          className="h-full bg-gradient-to-r from-primary to-accent rounded-full relative"
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay, ease: "easeOut" }}
-        />
+        >
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent shadow-[0_0_6px_rgba(45,212,191,0.6)]" />
+        </motion.div>
       </div>
     </div>
   );
@@ -74,7 +76,7 @@ export default function Skills() {
         >
           <span className="text-xs font-mono text-muted tracking-widest uppercase mb-3 block">/skills</span>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5">
-            Tech Stack
+            Tech <span className="gradient-text">Stack</span>
           </h2>
           <p className="text-muted">
             Technologies I use daily across development, security, and business tools.
@@ -90,7 +92,8 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 * ci, duration: 0.5 }}
             >
-              <h3 className="text-sm font-semibold text-muted uppercase tracking-widest mb-6">
+              <h3 className="text-sm font-semibold text-muted uppercase tracking-widest mb-6 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary/60" />
                 {cat.title}
               </h3>
               {cat.skills.map((skill, si) => (
